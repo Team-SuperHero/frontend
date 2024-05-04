@@ -5,7 +5,7 @@ import Navigation from './components/Navigation.vue'
 </script>
 
 <template>
-  <Navigation />
+  <!-- <Navigation /> -->
 
   <!-- <header>
     <div class="wrapper">
