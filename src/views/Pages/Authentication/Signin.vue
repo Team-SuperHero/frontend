@@ -5,28 +5,28 @@
     <p><button @click="signin"> Submit </button></p>
     <p><button @click="signInWithGoogle"> Sign in with Google </button></p>
     <p v-if="errorMessage">{{ errorMessage }}</p> -->
-    <div class="container">
+    <div class="container-fluid big_container">
         <div class="signin-form">
-            <div class="label px-5 py-5">
-                <h1 class="text-primary mb-3">Connectez-vous !</h1>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Adresse email</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <div class="form">
+                <div class="label px-5 py-5">
+                    <h1 class="mb-3">Connectez-vous !</h1>
+                    <div class="mb-3">
+                        <input required type="email" class="form-control" id="exampleFormControlInput1" placeholder="email">
+                    </div>
+                    <div class="mb-3">
+                        <input required class="form-control" id="exampleFormControlTextarea1" rows="3" type="password"
+                            placeholder="mot de passe" v-model="password" />
+                    </div>
+                    <button type="button" class="btn btn-primary" @click="signin">Se connecter</button>
+                    <p><small class="text-danger">{{ errorMessage }}</small></p>
+                    <p class="mt-3 mb-0 reset_password" @click="reset_password"><a href="#">Mot de passe oublié ? </a>
+                    </p>
+                    <p class="mb-3 reset_password" @click="create_account"><a href="#">Créer un compte</a></p>
+                    <hr>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Mot de passe</label>
-                    <input class="form-control" id="exampleFormControlTextarea1" rows="3" type="password" placeholder="Password" v-model="password" />
-                </div>
-                <button type="button" class="btn btn-primary" @click="signin">Se connecter</button>
-                <p class="mt-3 mb-0 text-primary reset_password" @click="reset_password"><a href="#">Mot de passe oublié ? </a></p>
-                <p class="mb-3 text-primary reset_password" @click="create_account"><a href="#">Créer un compte</a></p>
-                <hr>
-                <button class="d-flex googleBtn mt-4" @click="signInWithGoogle">
-                    <img src="../../../assets/img/google.png" alt="">
-                    <p class="mb-0">Connecter avec google</p>
-                </button>
+                <img class="potion" src="../../../assets/img/potion.webp" alt="">
+                <!-- <div class="imgSignin"></div> -->
             </div>
-            <div class="imgSignin"></div>
 
         </div>
     </div>
@@ -34,13 +34,13 @@
 
 <script setup>
 import { ref } from 'vue';
-import { 
-            getAuth, 
-            sendPasswordResetEmail, 
-            signInWithEmailAndPassword, 
-            GoogleAuthProvider,
-            signInWithPopup
-        } from 'firebase/auth'
+import {
+    getAuth,
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup
+} from 'firebase/auth'
 import { useRouter } from 'vue-router';
 
 const email = ref("");
@@ -56,15 +56,15 @@ const signin = () => {
         .catch(error => {
             switch (error.code) {
                 case "auth/invalid-email":
-                    errorMessage.value = "Invalid email";
+                    errorMessage.value = "email invalide";
                     break;
                 case "auth/user-not-found":
-                    errorMessage.value = "No account with that email was found";
+                    errorMessage.value = "Pas de compte avec ce mail";
                     break;
                 case "auth/wrong-password":
-                    errorMessage.value = "Incorect password"
+                    errorMessage.value = "mot de passe incorrect"
                 default:
-                    errorMessage.value = "Email or password incorrect";
+                    errorMessage.value = "email ou mot de passe incorecte";
                     break;
             }
         }
@@ -72,46 +72,90 @@ const signin = () => {
 }
 const reset_password = () => {
     sendPasswordResetEmail(getAuth(), email)
-    .then(() => {
-        alert("email sent")
-    })
-    .catch(err => console.log(err))
+        .then(() => {
+            alert("email sent")
+        })
+        .catch(err => console.log(err))
 }
 
 const create_account = () => {
     router.push("/register")
-} 
+}
 
 const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider)
-    .then(result => {
-        console.log(result.user)
-        router.push("/dashboard");
-    })
-    .catch(error => console.log(error))
+        .then(result => {
+            console.log(result.user)
+            router.push("/dashboard");
+        })
+        .catch(error => console.log(error))
 
 }
 </script>
 
 <style scoped>
-.signin-form
+.big_container
 {
+    height: 100vh;
+    background: url("../../../assets/img/maison-hantee.webp");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.signin-form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    width: 50%;
-    border-radius: 10px;
-    box-shadow: -8px 3px 22px -7px rgba(99,97,99,0.36);
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    background-image: url("../../../assets/img/papyrus.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
-.label
+
+.signin-form .form {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+
+.signin-form h1,
+.signin-form a {
+    color: #4e1702;
+}
+
+.signin-form a , .signin-form button, input::placeholder
 {
+    font-family: "Briem Hand", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400    ;
+    font-style: normal;
+}
+
+.signin-form h1 {
+    font-family: "Jaini Purva", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.signin-form input {
+    background-color: transparent;
+    border: 0px;
+    border-bottom: 2px solid #4e1702;
+    border-radius: 0px;
+}
+
+.label {
     width: 50%;
 }
-.imgSignin
-{
+
+.imgSignin {
     background: url("../../../assets/img/cadenas.jpg");
     width: 50%;
     background-position: right;
@@ -120,17 +164,41 @@ const signInWithGoogle = () => {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.reset_password:hover
-{
+
+.reset_password:hover {
     opacity: 0.8;
+
 }
+
 .googleBtn {
     height: 50px;
     align-items: center;
     border-radius: 5px
 }
-.googleBtn img
-{
+
+.potion {
+    width: 15%;
+    object-fit: contain;
+    transform: rotate(21deg);
+    animation: animate 2s linear infinite;
+    opacity: 0.9;
+}
+
+.googleBtn img {
     height: 100%;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(7px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 </style>
