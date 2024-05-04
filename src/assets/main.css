@@ -1,0 +1,5 @@
+@import './base.css';
+
+#app.container-fluid {
+    padding: 0;
+}
