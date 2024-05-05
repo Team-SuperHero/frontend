@@ -1,10 +1,31 @@
+<script setup>
+    import Modal_card from "../components/Modal_card.vue"
+</script>
+
+
 <template >
    <section class="card_shop">
         <div class="container d-flex align-items-center justify-content-center position-relative flex-wrap">
             <div class="card d-flex position-relative flex-column">
-                <button class='btn imgContainer'>
+                <!-- bouton triger modal -->
+                <button type="button" class='btn imgContainer' data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img src='https://images.pexels.com/photos/1456268/pexels-photo-1456268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'>
                 </button>
+                <!-- modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <Modal_card />
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <!-- modal -->
                 <div class="content">
                     <h2>Card One</h2>
                 </div>

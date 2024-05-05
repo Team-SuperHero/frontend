@@ -52,6 +52,7 @@ const to_connect = () =>
       </div>
     </div>
   </div>
+  <Card />
 </template>
 
 <style scoped>
