@@ -2,7 +2,7 @@
     <!-- Remove the container if you want to extend the Footer to full width. -->
     <div class="container mt-5 mx-0">
 
-    <footer class="text-center text-white" style="background-color: #caced1;">
+    <footer class="text-center text-white" style="background-color: #4e1702">
     <!-- Grid container -->
     <div class="container p-4">
         <!-- Section: Images -->
@@ -14,7 +14,7 @@
                 data-ripple-color="light"
                 >
                 <img
-                    src="https://mdbootstrap.com/img/new/fluid/city/113.jpg"
+                    src="/src/assets/img/Arkeup Group.png"
                     class="w-100"
                     />
                 <a href="#!">
@@ -31,7 +31,7 @@
                 data-ripple-color="light"
                 >
                 <img
-                    src="https://mdbootstrap.com/img/new/fluid/city/111.jpg"
+                    src="/src/assets/img/bocasay.svg"
                     class="w-100"
                     />
                 <a href="#!">
@@ -48,7 +48,7 @@
                 data-ripple-color="light"
                 >
                 <img
-                    src="https://mdbootstrap.com/img/new/fluid/city/112.jpg"
+                    src="/src/assets/img/ingenosya.png"
                     class="w-100"
                     />
                 <a href="#!">
@@ -65,7 +65,7 @@
                 data-ripple-color="light"
                 >
                 <img
-                    src="https://mdbootstrap.com/img/new/fluid/city/114.jpg"
+                    src="/src/assets/img/logo-etech.png"
                     class="w-100"
                     />
                 <a href="#!">
@@ -82,7 +82,7 @@
                 data-ripple-color="light"
                 >
                 <img
-                    src="https://mdbootstrap.com/img/new/fluid/city/115.jpg"
+                    src="/src/assets/img/logo-novity.png"
                     class="w-100"
                     />
                 <a href="#!">
@@ -99,7 +99,7 @@
                 data-ripple-color="light"
                 >
                 <img
-                    src="https://mdbootstrap.com/img/new/fluid/city/116.jpg"
+                    src="/src/assets/img/logo-pulse-rouge.svg"
                     class="w-100"
                     />
                 <a href="#!">
@@ -126,3 +126,9 @@
 
     </div>
 </template>
+
+<style scoped>
+footer {
+    width: 100vw;
+}
+</style>
