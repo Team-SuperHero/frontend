@@ -84,8 +84,12 @@ onMounted(() =>
     get_category()
 })
 
+
+
 const create = () => {
     isLoading.value = true
+    console.log("selected :" + selectedValue.value)
+    
     http.post("/product",
     {
         name : name.value,

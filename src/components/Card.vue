@@ -5,11 +5,11 @@
 
 <template >
    <section class="card_shop">
-        <div class="container d-flex align-items-center justify-content-center position-relative flex-wrap">
+        <div id="card_container" class="container d-flex align-items-center  flex-wrap">
             <div class="card d-flex position-relative flex-column">
                 <!-- bouton triger modal -->
                 <button type="button" class='btn imgContainer' data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <img src='https://images.pexels.com/photos/1456268/pexels-photo-1456268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'>
+                    <img src='/src/assets/img/Default_maison_hante_halloween_3D_1.webp'>
                 </button>
                 <!-- modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,14 +55,9 @@
     padding: 0;
     font-family: 'Poppins', sans-serif
 }
-body
-{
-    min-width: 100vw;
-    min-height: 100vh;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background: #16384c;
+
+#card_container {
+    margin: auto
 }
 
 .card_shop
@@ -70,6 +65,12 @@ body
     background: #000;
     padding-top: 50px;
 }
+
+.card_shop button
+{
+    border-radius: 20px;
+}
+
 .container .card
 {
     max-width: 300px;
@@ -77,6 +78,8 @@ body
     margin: 30px 10px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
     transition: 0.3s ease-in-out;
+    border-radius: 20px;
+    border: none
 }
 
 button
@@ -89,13 +92,12 @@ button
     width:250px;
     height:250px;
     z-index: 1;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
     border-radius: 10px;
 }
 .container .card .imgContainer img
 {
     max-width: 100%;
-    border-radius: 10px;
+    border-radius: 20px;
     height: 100%;
     object-fit: cover;
 }
@@ -105,6 +107,12 @@ button
     opacity: 1;
     margin-top: -40px;
     transition-delay: 0.3s;
+}
+
+.container .card .imgContainer img:hover
+{
+    transform: scale(1.1);
+    transition: 1s ease-in-out;
 }
 
 @media (max-width: 330px){
