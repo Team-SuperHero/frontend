@@ -26,11 +26,20 @@ const getProducts = () => {
     })
 }
 
+const filterProducts = (id) => {
+  
+  allProducts.value = allProducts.value.filter(product => {
+    return id == product.category.id
+})
+}
+
 
 onMounted(() => {
   getProducts()
   getCategories();
+  console.log("==>" + allProducts.value)
 })
+
 
 const to_connect = () => {
   router.push("/signin")
@@ -43,7 +52,7 @@ const to_connect = () => {
     <div class="container wrapper_cover">
       <div class="row">
         <div class=" col-md-6 text_box_cover">
-          <h1 class="fw-bold jaini-purva-regular">Marcher de l'ombre</h1>
+          <h1 class="fw-bold jaini-purva-regular">Boutique de l'ombre</h1>
           <p class="text-white lh-lg fs-5 font_text">Bienvenue dans le royaume enchanté de nos produits magiques et mystiques! 🌟✨
             Nous sommes ravis de vous accueillir dans notre boutique en ligne dédiée à l'enchanteur et au mystérieux. Ici, chaque article est un voyage à travers les dimensions, un passage vers des mondes où la magie réside dans chaque grain de sable et chaque étoile filante.
           </p>
@@ -79,7 +88,7 @@ Votre équipe enchantée</p>
   <div container-fluid recent>
     <div class="catalogue">
       <ul>
-        <li v-for="category in categories" :key="category.id">{{ category.name }}</li>
+        <li  v-for="category in categories" :key="category.id" @click="filterProducts(category.id)">{{ category.name }}</li>
       </ul>
     </div>
     <div class="container text-center mt-5">
