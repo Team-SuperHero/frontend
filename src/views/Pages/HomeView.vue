@@ -27,11 +27,20 @@ const getProducts = () => {
     })
 }
 
+const filterProducts = (id) => {
+  
+  allProducts.value = allProducts.value.filter(product => {
+    return id == product.category.id
+})
+}
+
 
 onMounted(() => {
   getProducts()
   getCategories();
+  console.log("==>" + allProducts.value)
 })
+
 
 const to_connect = () => {
   router.push("/signin")
@@ -44,7 +53,7 @@ const to_connect = () => {
     <div class="container wrapper_cover">
       <div class="row">
         <div class=" col-md-6 text_box_cover">
-          <h1 class="fw-bold jaini-purva-regular">Marcher de l'ombre</h1>
+          <h1 class="fw-bold jaini-purva-regular">Boutique de l'ombre</h1>
           <p class="text-white lh-lg fs-5 font_text">Bienvenue dans le royaume enchanté de nos produits magiques et mystiques! 🌟✨
             Nous sommes ravis de vous accueillir dans notre boutique en ligne dédiée à l'enchanteur et au mystérieux. Ici, chaque article est un voyage à travers les dimensions, un passage vers des mondes où la magie réside dans chaque grain de sable et chaque étoile filante.
           </p>
@@ -62,28 +71,17 @@ const to_connect = () => {
 
   <div class="container my-5">
 
-  <p class="text-white">Nos produits, conçus avec amour et passion, sont le fruit de traditions ancestrales et de recherches surnaturelles. Que vous soyez un sorcier en herbe, une apprentie sorcière, ou simplement quelqu'un qui aime l'extraordinaire, vous trouverez ici des objets qui éveilleront votre imagination et enrichiront votre quotidien avec des touches de magie.
-
-De la Grimoire de Magie pour débutant, qui vous guidera dans vos premiers pas dans le monde de la magie, à la Tunique pour Mage Expert, conçue pour protéger et magnifier votre pouvoir, chaque article est choisi pour son potentiel à transformer votre vie.
-
-Nous sommes fiers de notre engagement à offrir des produits de haute qualité, fabriqués avec soin et attention. Chaque article est enveloppé dans un emballage protecteur pour assurer sa sécurité pendant son voyage jusqu'à vous.
-
-Alors, prêtez-vous à plonger dans l'aventure? Que vous cherchiez à explorer de nouvelles dimensions, à renforcer votre magie, ou simplement à ajouter un peu de magie à votre vie quotidienne, nous sommes impatients de vous accompagner dans ce voyage incroyable.
-
-N'hésitez pas à nous contacter si vous avez des questions ou si vous avez besoin d'aide pour choisir le bon produit pour vous. Nous sommes là pour vous aider à trouver le bonheur magique.
-
-Accueillez-vous dans notre royaume, et laissez la magie commencer. 🌈🔮
-
-Votre équipe enchantée</p>
+  <p class="text-white text-center">Nos produits, conçus avec amour et passion, sont le fruit de traditions ancestrales et de recherches surnaturelles. Que vous soyez un sorcier en herbe, une apprentie sorcière, ou simplement quelqu'un qui aime l'extraordinaire, vous trouverez ici des objets qui éveilleront votre imagination et enrichiront votre quotidien avec des touches de magie.
+</p>
   </div>
 
   <div container-fluid recent>
     <div class="catalogue">
       <ul>
-        <li v-for="category in categories" :key="category.id">{{ category.name }}</li>
+        <li  v-for="category in categories" :key="category.id" @click="filterProducts(category.id)">{{ category.name }}</li>
       </ul>
     </div>
-    <div class="container text-center mt-5">
+    <div id="product" class="container text-center mt-5">
       <h2 class="text-white">Les produits phares :</h2> 
     </div>
     <div class="d-flex flex-wrap wrap-card"> 
@@ -93,7 +91,7 @@ Votre équipe enchantée</p>
   </div>
 
   <div container-fluid>
-    <div class="catalog">Les Magiciens concocteurs
+    <div class="catalog">
       <Footer />
     </div>
   </div>
