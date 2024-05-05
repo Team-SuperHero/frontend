@@ -9,6 +9,7 @@ export const useProductsStore = defineStore('products', {
       fetchProduct() {
         http.get("/product/mine/").then((response) => {
           this.products = response.data;
+          console.log(this.products)
         });
       },
     },
