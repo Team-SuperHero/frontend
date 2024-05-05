@@ -41,13 +41,6 @@
 <script setup>
 import { ref } from 'vue';
 import http from '@/services/http';
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    sendPasswordResetEmail,
-    GoogleAuthProvider,
-    signInWithPopup
-} from 'firebase/auth'
 import { useRouter } from 'vue-router';
 
 const email = ref("");

@@ -1,6 +1,8 @@
-$primary: #4e1702; 
+$primary: #4e1702;
 $secondary: #ffffff;
 
 @import '../node_modules/bootstrap/scss/bootstrap';
 
-
+body{
+    background: black;
+}
