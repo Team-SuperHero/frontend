@@ -4,6 +4,7 @@ import http from '../../services/http'
 import { onMounted, ref } from 'vue';
 
 import Card from '../../components/Card.vue'
+import Footer from '../../components/Footer.vue'
 
 const categories = ref([])
 const router = useRouter();
@@ -88,6 +89,12 @@ Votre équipe enchantée</p>
     <div class="d-flex flex-wrap wrap-card"> 
       <Card class="card_list" v-for="p in allProducts" :key=p.id :name="p.name" :description="p.description" :image="p.image"
         :payement="p.payement_method" />
+    </div>
+  </div>
+
+  <div container-fluid>
+    <div class="catalog">Les Magiciens concocteurs
+      <Footer />
     </div>
   </div>
 
