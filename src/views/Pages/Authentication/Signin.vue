@@ -1,17 +1,12 @@
 <template>
-    <!-- <h1>Sign in</h1>
-    <p><input type="text" placeholder="Email" v-model="email" /></p>
-    <p><input type="password" placeholder="Passord" v-model="password" /></p>
-    <p><button @click="signin"> Submit </button></p>
-    <p><button @click="signInWithGoogle"> Sign in with Google </button></p>
-    <p v-if="errorMessage">{{ errorMessage }}</p> -->
     <div class="container-fluid big_container">
         <div class="signin-form">
             <div class="form">
                 <div class="label px-5 py-5">
                     <h1 class="mb-3">Connectez-vous !</h1>
                     <div class="mb-3">
-                        <input required type="email" class="form-control" id="exampleFormControlInput1" placeholder="email">
+                        <input required class="form-control" id="exampleFormControlInput1" placeholder="pseudo"
+                            v-model="pseudo">
                     </div>
                     <div class="mb-3">
                         <input required class="form-control" id="exampleFormControlTextarea1" rows="3" type="password"
@@ -19,8 +14,6 @@
                     </div>
                     <button type="button" class="btn btn-primary" @click="signin">Se connecter</button>
                     <p><small class="text-danger">{{ errorMessage }}</small></p>
-                    <p class="mt-3 mb-0 reset_password" @click="reset_password"><a href="#">Mot de passe oublié ? </a>
-                    </p>
                     <p class="mb-3 reset_password" @click="create_account"><a href="#">Créer un compte</a></p>
                     <hr>
                 </div>
@@ -34,69 +27,38 @@
 
 <script setup>
 import { ref } from 'vue';
-import {
-    getAuth,
-    sendPasswordResetEmail,
-    signInWithEmailAndPassword,
-    GoogleAuthProvider,
-    signInWithPopup
-} from 'firebase/auth'
+import http from '@/services/http';
+import { jwtDecode } from "jwt-decode";
 import { useRouter } from 'vue-router';
 
-const email = ref("");
+const pseudo = ref("");
 const password = ref("");
 const errorMessage = ref();
 const router = useRouter();
+
 const signin = () => {
-    signInWithEmailAndPassword(getAuth(), email.value, password.value)
-        .then(data => {
-            console.log("Successfully registered");
-            router.push('/dashboard')
-        })
-        .catch(error => {
-            switch (error.code) {
-                case "auth/invalid-email":
-                    errorMessage.value = "email invalide";
-                    break;
-                case "auth/user-not-found":
-                    errorMessage.value = "Pas de compte avec ce mail";
-                    break;
-                case "auth/wrong-password":
-                    errorMessage.value = "mot de passe incorrect"
-                default:
-                    errorMessage.value = "email ou mot de passe incorecte";
-                    break;
-            }
+    http.post('auth/pair',
+        {
+            username: pseudo.value,
+            password: password.value
         }
-        )
-}
-const reset_password = () => {
-    sendPasswordResetEmail(getAuth(), email)
-        .then(() => {
-            alert("email sent")
+    )
+        .then(response => {
+            console.log(response)
+            localStorage.setItem('acces_token', response.data.access)
+            const user = jwtDecode(response.data.access)
+            router.push('/dashboard/' + user.user_id)
         })
-        .catch(err => console.log(err))
 }
 
 const create_account = () => {
     router.push("/register")
 }
 
-const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(getAuth(), provider)
-        .then(result => {
-            console.log(result.user)
-            router.push("/dashboard");
-        })
-        .catch(error => console.log(error))
-
-}
 </script>
 
 <style scoped>
-.big_container
-{
+.big_container {
     height: 100vh;
     background: url("../../../assets/img/maison-hantee.webp");
     background-repeat: no-repeat;
@@ -130,11 +92,12 @@ const signInWithGoogle = () => {
     color: #4e1702;
 }
 
-.signin-form a , .signin-form button, input::placeholder
-{
+.signin-form a,
+.signin-form button,
+input::placeholder {
     font-family: "Briem Hand", cursive;
     font-optical-sizing: auto;
-    font-weight: 400    ;
+    font-weight: 400;
     font-style: normal;
 }
 

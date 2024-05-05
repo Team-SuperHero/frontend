@@ -6,18 +6,22 @@ import { onMounted, ref } from 'vue';
 import Card from '../../components/Card.vue'
 import Modal_card from '../../components/Modal_card.vue'
 
-const posts = ref(null);
+const categories = ref([])
 const router = useRouter();
 
-const fetch_post = () =>
+
+const getCategories = () =>
 {
-  http.get('/posts')
-  .then(response => {
-  posts.value = response.data;
-  console.log(posts.value);
+  http.get("/product")
+  .then((response) =>{
+    categories.value = response.data.results
   })
+  .catch(e => alert(e))
 }
-fetch_post();
+
+onMounted(() => {
+  getCategories();
+})
 
 const to_connect = () =>
 {
@@ -43,16 +47,13 @@ const to_connect = () =>
     </div>
   </div>
 
-  <div class="container-fluid catalogue">
-    <div class="container introduction">
-      <img src="" alt="">
-      <div>
-        <h2>Catalogues</h2>
-        <p></p>
-      </div>
-    </div>
+  <div container-fluid>
+    <div class="container catalogue">
   </div>
-  <Card />
+    
+    <Card />
+  </div>
+  
 </template>
 
 <style scoped>
@@ -63,10 +64,6 @@ const to_connect = () =>
     height: 100vh;
   }
   
-  .catalogue
-  {
-    background: #000;
-  }
   .wrapper_cover
   {
     display: flex;

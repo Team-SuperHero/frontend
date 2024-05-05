@@ -26,9 +26,6 @@
                     </div>
                     </div>
                 <!-- modal -->
-                <div class="content">
-                    <h2>Card One</h2>
-                </div>
             </div>
             <!-- <div class="card d-flex position-relative flex-column">
                 <div class='imgContainer'>
@@ -78,7 +75,6 @@ body
     max-width: 300px;
     height: 215px;
     margin: 30px 10px;
-    padding: 20px 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
     transition: 0.3s ease-in-out;
 }
@@ -87,36 +83,21 @@ button
 {
     border-width: 0px;
 }
-.container .card:hover
-{
-    height: 250px;
-}
 .container .card .imgContainer
 {
     position: relative;
     width:250px;
     height:250px;
-    top:-50px;
-    /* left:10px; */
     z-index: 1;
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    border-radius: 10px;
 }
 .container .card .imgContainer img
 {
     max-width: 100%;
-    border-radius: 4px;
-}
-.container .card .content
-{
-    position: relative;
-    margin-top: -140px;
-    padding: 10px 15px;
-    text-align: center;
-    color:#111;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s ease-in-out;
+    border-radius: 10px;
+    height: 100%;
+    object-fit: cover;
 }
 .container .card:hover .content
 {

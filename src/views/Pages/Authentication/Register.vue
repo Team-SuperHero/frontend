@@ -6,6 +6,15 @@
                     <div class="label px-5 py-5">
                         <h1 class="mb-3">Créer un compte</h1>
                         <div class="mb-3">
+                            <input required class="form-control" rows="3" placeholder="Pseudo" v-model="userName" />
+                        </div>
+                        <div class="mb-3">
+                            <input required class="form-control" rows="3" placeholder="Prénom" v-model="firstName" />
+                        </div>
+                        <div class="mb-3">
+                            <input required class="form-control" rows="3" placeholder="Nom" v-model="lastName" />
+                        </div>
+                        <div class="mb-3">
                             <input required type="email" class="form-control" id="exampleFormControlInput1"
                                 placeholder="email" v-model="email">
                         </div>
@@ -13,6 +22,7 @@
                             <input required class="form-control" id="exampleFormControlTextarea1" rows="3"
                                 type="password" placeholder="mot de passe" v-model="password" />
                         </div>
+
                         <div class="d-flex">
                             <button type="button" class="btn btn-primary" @click="register">Créer</button>
                             <div v-if="isLoading" class="spinner-border loader mx-3" role="status">
@@ -30,6 +40,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import http from '@/services/http';
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -41,31 +52,31 @@ import { useRouter } from 'vue-router';
 
 const email = ref("");
 const password = ref("");
+const userName = ref("");
+const firstName = ref("");
+const lastName = ref("");
+
 let errorMessage = ref("");
 let isLoading = ref(false);
 const router = useRouter();
+
 const register = () => {
     isLoading.value = true;
-    createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-        .then(data => {
+    http.post('user/',
+        {
+            password: password.value,
+            email: email.value,
+            username: userName.value,
+            first_name: firstName.value,
+            last_name: lastName.value
+        }
+    )
+        .then(response => {
+            console.log(response);
             isLoading.value = false;
-            router.push('/dashboard')
-        })
-        .catch(e => {
-            errorMessage.value = "*Erreur lors du création"
+            router.push('signin')
         })
 }
-
-// const signInWithGoogle = () => {
-//     const provider = new GoogleAuthProvider();
-//     signInWithPopup(getAuth(), provider)
-//         .then(result => {
-//             console.log(result.user)
-//             router.push("/dashboard");
-//         })
-//         .catch(error => console.log(error))
-
-// }
 </script>
 
 <style scoped>
