@@ -41,14 +41,16 @@ const to_connect = () => {
 <template>
   <div class="container-fluid cover">
     <div class="container wrapper_cover">
-      <div class="text_box_cover">
-        <h1 class="fw-bold jaini-purva-regular">Marcher de l'ombre</h1>
-        <p class="text-white lh-lg fs-5 font_text">Bienvenue dans le royaume enchanté de nos produits magiques et mystiques! 🌟✨
-          Nous sommes ravis de vous accueillir dans notre boutique en ligne dédiée à l'enchanteur et au mystérieux. Ici, chaque article est un voyage à travers les dimensions, un passage vers des mondes où la magie réside dans chaque grain de sable et chaque étoile filante.
-        </p>
-        <button class=" text-white btn btn-lg btn_color mt-5" @click="to_connect()">Invoquer votre esprit</button>
+      <div class="row">
+        <div class=" col-md-6 text_box_cover">
+          <h1 class="fw-bold jaini-purva-regular">Marcher de l'ombre</h1>
+          <p class="text-white lh-lg fs-5 font_text">Bienvenue dans le royaume enchanté de nos produits magiques et mystiques! 🌟✨
+            Nous sommes ravis de vous accueillir dans notre boutique en ligne dédiée à l'enchanteur et au mystérieux. Ici, chaque article est un voyage à travers les dimensions, un passage vers des mondes où la magie réside dans chaque grain de sable et chaque étoile filante.
+          </p>
+          <button class=" text-white btn btn-lg btn_color mt-5" @click="to_connect()">Invoquer votre esprit</button>
+        </div>
+        <img class="col-md-6 guard" src="/src/assets/img/sorcier.png" alt="">
       </div>
-      <img class="guard" src="/src/assets/img/sorcier.png" alt="">
 
     </div>
     <div class="wrap_cities">
@@ -84,7 +86,7 @@ Votre équipe enchantée</p>
       <h2 class="text-white">Les produits phares :</h2> 
     </div>
     <div class="d-flex flex-wrap wrap-card"> 
-      <Card class="card_list" v-for="p in allProducts" :name="p.name" :description="p.description" :image="p.image"
+      <Card class="card_list" v-for="p in allProducts" :key=p.id :name="p.name" :description="p.description" :image="p.image"
         :payement="p.payement_method" />
     </div>
   </div>
